@@ -16,7 +16,7 @@ class Vertice:
 	def peso(self, vizinho):
 		if haAresta(self, vizinho):
 			return self.adjascentes[vizinho]
-		else
+		else:
 			return float("inf") 
 			# float("inf") vai criar um número infinito
 
@@ -45,7 +45,6 @@ class Graph:
 
 	def qtdArestas(self):
 		return self.arestas
-
 
 	def adicionaVertice(self, id, rotulo):
 		novo = Vertice(id, rotulo)
