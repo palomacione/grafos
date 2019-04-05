@@ -25,20 +25,23 @@ class Vertice:
 
 
 class Graph:
-	def __init__(self):
+	def __init__(self, file):
 		self.vertices = {}
 		self.arestas = 0
 
-	def __init__(self, file):
-		self.__init__()
 		f = open(file, "r")
 		f1 = f.readlines()
-		edges = False
 		n = int(f1[0].split()[-1])
-		for i in range(1, n+1):
-			line = f1[i]
-			self.adicionaVertice(int(line.split()[0]), line.split[1])
 
+		for i in range(1, n+1):
+			id, rotulo = f1[i].split()
+			print(id, rotulo)
+			self.adicionaVertice(int(id), rotulo)
+
+		for line in f1[n+2:]:
+			v1, v2, peso = line.split()
+			print(v1, v2, peso)
+			self.adicionaAresta(int(v1), int(v2), peso)
 
 	def qtdVertices(self):
 		return len(self.vertices)
@@ -57,4 +60,3 @@ class Graph:
 
 	def haAresta(self, v1, v2):
 		return self.vertices[v1] in self.vertices[v2].adjascentes and self.vertices[v2] in self.vertices[v1].adjascentes
-
