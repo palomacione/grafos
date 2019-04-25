@@ -1,3 +1,5 @@
+import shlex
+
 class Vertice:
 	def __init__(self, id, rotulo):
 		self.id = id
@@ -34,7 +36,7 @@ class Graph:
 		n = int(f1[0].split()[-1])
 
 		for i in range(1, n+1):
-			id, rotulo = f1[i].split()
+			id, rotulo = shlex.split(f1[i])
 			#print(id, rotulo)
 			self.adicionaVertice(int(id), rotulo)
 
