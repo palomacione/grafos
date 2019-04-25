@@ -3,15 +3,19 @@ from graph import *
 from collections import deque
 
 def hierholzer(g):
-    visited = {x: False for x in range(g.qtdArestas)}
+    edges = []
+    for v in g.vertices:
+        for a in g.getVertice(v).vizinhos():
+            edges.append((v, a));
+    res = set(map(tuple, map(sorted, edges)))
+    visited = {x: False for x in res}
     (r, ciclo) = buscarSubcicloEuleriano(g, 1, visited)
-
     if not r:
         return (False, None)
-    else
+    else:
         if all(visited):
             return (True, ciclo)
-        else
+        else:
             return (False, None)
 
 def buscarSubcicloEuleriano(g, v, visited):
@@ -19,24 +23,55 @@ def buscarSubcicloEuleriano(g, v, visited):
     t = v
     while True:
         shoultReturn = True
+        vu = None
+        u = None
         for neighbour in g.getVertice(v).vizinhos():
-            if not visited[neighbour]:
+            u = neighbour
+            vu = tuple(sorted((v, u)))
+            if not visited[vu]:
                 shoultReturn = False
+                break
         if shoultReturn:
             return (False, None)
-        else
-
+        else:
+            visited[vu] = True
+            v = u
+            ciclo.append(v)
         if v == t:
             break;
+    vPassed = set(ciclo)
+    for x in vPassed:
+        someNotVisited = False
+        for neighbour in g.getVertice(x).vizinhos():
+            vu = tuple(sorted((x, neighbour)))
+            if not visited[vu]:
+                someNotVisited = True
+                break
+        if not someNotVisited:
+            continue
+        (r, ciclo2) = buscarSubcicloEuleriano(g, x, visited)
+        if not r:
+            return (False, None)
+        cicloTemp = ciclo
+        ciclo = []
+        inserted = False
+        for i in cicloTemp:
+            if i == x and not inserted:
+                inserted = True
+                ciclo.extend(ciclo2)
+            else:
+                ciclo.append(i)
+    return (True, ciclo)
 
 def main():
     fileName = sys.argv[1]
     g = Graph(fileName)
-    found, cile = hierholzer(g)
+
+    found, cicle = hierholzer(g)
     if found:
         print(1)
         print(", ".join(map(str, cicle)))
-    else
+    else:
         print(0)
 
 if __name__ == "__main__":
