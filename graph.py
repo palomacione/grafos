@@ -21,7 +21,7 @@ class Vertice:
 			# float("inf") vai criar um número infinito
 
 	def adicionaAresta(self, vizinho, peso):
-		self.adjascentes[vizinho] = peso
+		self.adjascentes[vizinho] = float(peso)
 
 
 class Graph:
