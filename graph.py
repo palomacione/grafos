@@ -1,5 +1,5 @@
 import shlex
-
+import sys
 class Vertice:
 	def __init__(self, id, rotulo):
 		self.id = id
@@ -40,6 +40,8 @@ class Graph:
 			#print(id, rotulo)
 			self.adicionaVertice(int(id), rotulo)
 
+		op = f1[n+1]
+		print(op)
 		for line in f1[n+2:]:
 			v1, v2, peso = line.split()
 			#print(v1, v2, peso)
@@ -65,3 +67,9 @@ class Graph:
 
 	def haAresta(self, v1, v2):
 		return v1 in self.vertices[v2].adjascentes and v2 in self.vertices[v1].adjascentes
+
+if __name__ == "__main__":
+	if (len(sys.argv) < 2):
+		print("Use: ./" +sys.argv[0] + " [Nome do Arquivo]")
+	else:
+		Graph(sys.argv[1])
