@@ -8,10 +8,11 @@ def fortemente_conexas(g):
 
 	for v in g.vertices.keys():
 		u = g.getVertice(v)
-		gt.adicionaVertice(v, u.rotulo())
+		gt.adicionaVertice(int(v), u.rotulo())
 
 	for v in g.vertices.keys():
 		u = g.getVertice(v)
+		print(v)
 		for adj in u.vizinhos():
 			gt.getVertice(adj).adicionaArco(v, u.peso(adj))
 
@@ -50,9 +51,10 @@ def dfs_visit(g, v, visited, tempo_i, predecessor, tempo_f, tempo):
 	visited[v] = True
 	tempo += 1
 	tempo_i[v] = tempo
-	for u in g.getVertice(u).vizinhos():
-		predecessor[u] = v
-		dfs_visit(g, u, visited, tempo_i, predecessor, tempo_f, tempo)
+	for u in g.getVertice(v).vizinhos():
+		if not visited[u]:
+			predecessor[u] = v
+			dfs_visit(g, u, visited, tempo_i, predecessor, tempo_f, tempo)
 
 	tempo += 1
 	tempo_f[v] = tempo
