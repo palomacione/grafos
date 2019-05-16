@@ -22,30 +22,33 @@ class Vertice:
 			return float("inf")
 			# float("inf") vai criar um número infinito
 
-	def adicionaAresta(self, vizinho, peso):
+	def adicionaArco(self, vizinho, peso):
 		self.adjascentes[vizinho] = float(peso)
 
 
 class Graph:
-	def __init__(self, file):
+	def __init__(self, file = None):
 		self.vertices = {}
 		self.arestas = 0
+		if file != None:
+			f = open(file, "r")
+			f1 = f.readlines()
+			n = int(f1[0].split()[-1])
 
-		f = open(file, "r")
-		f1 = f.readlines()
-		n = int(f1[0].split()[-1])
+			for i in range(1, n+1):
+				id, rotulo = shlex.split(f1[i])
+				#print(id, rotulo)
+				self.adicionaVertice(int(id), rotulo)
 
-		for i in range(1, n+1):
-			id, rotulo = shlex.split(f1[i])
-			#print(id, rotulo)
-			self.adicionaVertice(int(id), rotulo)
-
-		op = f1[n+1]
-		print(op)
-		for line in f1[n+2:]:
-			v1, v2, peso = line.split()
-			#print(v1, v2, peso)
-			self.adicionaAresta(int(v1), int(v2), peso)
+			op = f1[n+1]
+			print(op)
+			for line in f1[n+2:]:
+				v1, v2, peso = line.split()
+				#print(v1, v2, peso)
+				if(op == "*arcs"):
+					self.getVertice(v1).adicionaArco(int(v2), peso)
+				else:
+					self.adicionaAresta(int(v1), int(v2), peso)
 
 	def getVertice(self, id):
 		return self.vertices[id]
@@ -61,8 +64,8 @@ class Graph:
 		self.vertices[id] = novo
 
 	def adicionaAresta(self, v1, v2, peso):
-		self.vertices[v1].adicionaAresta(v2, peso)
-		self.vertices[v2].adicionaAresta(v1, peso)
+		self.vertices[v1].adicionaArco(v2, peso)
+		self.vertices[v2].adicionaArco(v1, peso)
 		self.arestas += 1
 
 	def haAresta(self, v1, v2):
