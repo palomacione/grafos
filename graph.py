@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import shlex
 import sys
 class Vertice:
