@@ -14,7 +14,7 @@ class Vertice:
 	def grau(self):
 		return len(self.adjascentes)
 
-	def rotulo(self):
+	def get_rotulo(self):
 		return self.rotulo
 
 	def peso(self, vizinho):
@@ -39,11 +39,9 @@ class Graph:
 
 			for i in range(1, n+1):
 				id, rotulo = shlex.split(f1[i])
-				#print(id, rotulo)
 				self.adicionaVertice(int(id), rotulo)
 
 			op = f1[n+1]
-			print(op)
 			for line in f1[n+2:]:
 				v1, v2, peso = line.split()
 				#print(v1, v2, peso)

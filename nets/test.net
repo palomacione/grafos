@@ -1,0 +1,15 @@
+*vertices 7
+1 "Acordar"
+2 "Escovar os dentes"
+3 "Vestir as calças"
+4 "Ir trabalhar"
+5 "Chorar"
+6 "Chorar mais"
+7 "Voltar do trabalho"
+*arcs 
+2 1 1 
+3 2 1
+4 3 1
+6 5 1
+7 4 1
+5 1 1

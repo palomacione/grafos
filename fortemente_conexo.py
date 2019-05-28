@@ -8,11 +8,10 @@ def fortemente_conexas(g):
 
 	for v in g.vertices.keys():
 		u = g.getVertice(v)
-		gt.adicionaVertice(int(v), u.rotulo())
+		gt.adicionaVertice(int(v), u.get_rotulo())
 
 	for v in g.vertices.keys():
 		u = g.getVertice(v)
-		print(v)
 		for adj in u.vizinhos():
 			gt.getVertice(adj).adicionaArco(v, u.peso(adj))
 
@@ -64,7 +63,7 @@ def main():
 	g = Graph(fileName)
 	
 	predecessor_t = fortemente_conexas(g)
-	print(",".join(map(str, predecessor_t)))
+	print(", ".join(map(str, predecessor_t)))
 
 
 if __name__ == "__main__":
