@@ -1,0 +1,29 @@
+*vertices 10
+1 "Universidade Federal de Santa Catarina"
+2 "Parque Municipal do Córrego Grande"
+3 "Lagoa da Conceição"
+4 "Mercado Público de Florianópolis"
+5 "Ponte"
+6 "Acesso BR101 - BR282"
+7 "Praia da Joaquina"
+8 "Praia Mole"
+9 "Elevado Rio Tavares"
+10 "Beira Mar Norte"
+*edges
+1 2 350
+1 4 4100
+1 9 8300
+1 10 3700
+2 10 6600
+2 3 6000
+3 7 5600
+3 8 4900
+3 9 9500
+4 5 1500
+4 10 2000
+5 6 8800
+5 10 3100
+7 8 3400
+7 9 12500
+8 9 12000
+9 10 14000
