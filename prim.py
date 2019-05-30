@@ -24,7 +24,7 @@ def prim(g):
             prev = distances[neighbour]
             next_distance = v.peso(neighbour)
             if next_distance < prev:
-                previous_vertices[neighbour] = vertice
+                previous_vertices[neighbour] = current_vertex
                 distances[neighbour] = next_distance
     return distances, previous_vertices
 
@@ -45,7 +45,7 @@ def prim2(g):
             prev = mins.get(neighbour)
             next_distance = v.peso(neighbour)
             if prev is None or next_distance < prev:
-                previous_vertices[neighbour] = vertice
+                previous_vertices[neighbour] = current_vertex
                 mins[neighbour] = next_distance
                 heappush(q, (next_distance, neighbour))
     return mins, previous_vertices
@@ -63,6 +63,8 @@ def main():
     end = time()
     print("%.20f" % (end - start))
     print(distance)
+    print(previous_vertices)
+    print(previous_vertices2)
     print(mins)
     print(sum(distance.values()))
     print(sum(mins.values()))
