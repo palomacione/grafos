@@ -1,42 +1,48 @@
-import sys
+# -*- coding: utf-8 -*-
 from graph import *
 
+
 def main():
-	fileName = sys.argv[1]
-	g = Graph(fileName)
-	lista = dfs_OT(g)
-	print(", ".join(str(e) for e in lista))
-
-def dfs_OT(g):
-	visited = {}
-	tempo_i = {}
-	tempo_f = {}
-	predecessor = {}
-
-	for v in g.vertices.keys():
-		visited[v] = False
-		tempo_i[v] = float("inf")
-		tempo_f[v] = float("inf")
+    filename = sys.argv[1]
+    g = Graph(filename)
+    lista = dfs_ot(g)
+    print(", ".join(str(e) for e in lista))
 
 
-	tempo = 0
-	OT = []
-	for u in g.vertices.keys():
-		if not visited[u]:
-			dfsVisitOT(g, u, visited, tempo_i, tempo_f, tempo, OT)
-	return OT
+def dfs_ot(g):
+    visited = {}
+    tempo_i = {}
+    tempo_f = {}
 
-def dfsVisitOT(g, v, visited, tempo_i, tempo_f, tempo, OT):
-	visited[v] = True
-	tempo += 1
-	tempo_i[v] = tempo
+    for v in g.vertices.keys():
+        visited[v] = False
+        tempo_i[v] = float("inf")
+        tempo_f[v] = float("inf")
 
-	for c in g.getVertice(v).vizinhos():
-		if not visited[c]:
-			dfsVisitOT(g, c, visited, tempo_i, tempo_f, tempo, OT)
+    tempo = 0
+    ot = []
+    for u in g.vertices.keys():
+        if not visited[u]:
+            dfs_visit_ot(g, u, visited, tempo_i, tempo_f, tempo, ot)
+    return ot
 
-	tempo += 1
-	tempo_f[v] = tempo
-	OT.insert(0, g.getVertice(v).get_rotulo())
 
-main()
+def dfs_visit_ot(g, v, visited, tempo_i, tempo_f, tempo, ot):
+    visited[v] = True
+    tempo += 1
+    tempo_i[v] = tempo
+
+    for c in g.get_vertice(v).vizinhos():
+        if not visited[c]:
+            dfs_visit_ot(g, c, visited, tempo_i, tempo_f, tempo, ot)
+
+    tempo += 1
+    tempo_f[v] = tempo
+    ot.insert(0, g.get_vertice(v).get_rotulo())
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Use: ./" + sys.argv[0] + " [Nome do Arquivo]")
+    else:
+        main()
