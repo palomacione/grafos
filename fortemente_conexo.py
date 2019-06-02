@@ -58,7 +58,8 @@ def main():
     g = Graph(filename)
 
     floresta = fortemente_conexas(g)
-    print(floresta)
+    for e in floresta:
+    	print(", ".join(str(a) for a in e))
 
 
 if __name__ == "__main__":
