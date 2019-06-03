@@ -7,7 +7,7 @@ f[3] = 21
 
 l = []
 for idVertice, tempoVertice in f.items():
-	l.append((idVertice, tempoVertice))
+    l.append((idVertice, tempoVertice))
 print(l)
 l.sort(key=lambda x: x[1], reverse=True)
 print(l)

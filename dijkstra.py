@@ -1,5 +1,6 @@
-from graph import *
 from collections import deque
+
+from graph import *
 
 
 def dijkstra(g, s):

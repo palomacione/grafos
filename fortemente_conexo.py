@@ -59,7 +59,7 @@ def main():
 
     floresta = fortemente_conexas(g)
     for e in floresta:
-    	print(", ".join(str(a) for a in e))
+        print(", ".join(str(a) for a in e))
 
 
 if __name__ == "__main__":
