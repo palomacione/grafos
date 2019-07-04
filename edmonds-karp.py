@@ -47,24 +47,18 @@ def bfs(C, F, source, sink):
     return None
 
 def main():
-	g = Graph()
-	g.adiciona_vertice(1, "1")
-	g.adiciona_vertice(2, "2")
-	g.adiciona_vertice(3, "3")
-	g.adiciona_vertice(4, "4")
-	g.get_vertice(1).adiciona_arco(g.get_vertice(2), 5)
-	g.get_vertice(1).adiciona_arco(g.get_vertice(3), 10)
-	g.get_vertice(2).adiciona_arco(g.get_vertice(3), 15)
-	g.get_vertice(2).adiciona_arco(g.get_vertice(4), 20)
-	g.get_vertice(3).adiciona_arco(g.get_vertice(4), 5)
-
+	filename = sys.argv[1]
+	g = FluxoGraph(filename)
 	C = []
 	for u in g.vertices.keys():
 		l = []
 		for v in g.vertices.keys():
-			l.append(g.get_vertice(u).peso(g.get_vertice(v), True))
+			l.append(g.get_vertice(u).peso(v, True))
 		C.append(l)
+	print(edmonds_karp(C, int(g.s) - 1,int(g.t) -1))
 
-	pprint(C)
-	print(edmonds_karp(C, 0, 3))
-main()
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Use: ./" + sys.argv[0] + " [Nome do Arquivo]")
+    else:
+        main()

@@ -86,8 +86,8 @@ class Graph:
 class BipartiteGraph(Graph):
 
     def __init__(self, *args, **kwargs):
-        self.verticesX = set()
-        self.verticesY = set()
+        self.vertices_x = set()
+        self.vertices_y = set()
         super(BipartiteGraph, self).__init__(*args, **kwargs)
 
     def read_file(self, file):
@@ -96,14 +96,14 @@ class BipartiteGraph(Graph):
         f1 = f.readlines()
         if ext[-1] == "gr":
             for line in f1:
-                a, v1, v2 = line.split()
                 if line[0] == "c" or line[0] == "p":
                     continue;
                 elif line[0] == "e":
+                    a, v1, v2 = line.split()
                     self.adiciona_vertice(int(v1), v1)
-                    self.verticesX.add(int(v1))
+                    self.vertices_x.add(int(v1))
                     self.adiciona_vertice(int(v2), v2)
-                    self.verticesY.add(int(v2))
+                    self.vertices_y.add(int(v2))
                     self.adiciona_aresta(int(v1), int(v2), 1)
 
 
@@ -120,7 +120,6 @@ class FluxoGraph(Graph):
         f1 = f.readlines()
         if ext[-1] == "gr":
             for line in f1:
-                a, v1, v2, peso = line.split()
                 if line[0] == "c" or line[0] == "p":
                     continue;
                 elif line[0] == "n":
@@ -130,13 +129,11 @@ class FluxoGraph(Graph):
                     else:
                         self.t = i[1]
                 elif line[0] == "a":
+                    a, v1, v2, peso = line.split()
                     self.adiciona_vertice(int(v1), v1)
                     self.adiciona_vertice(int(v2), v2)
                     self.get_vertice(v1).adiciona_arco(int(v2), peso)
-                else:
-                    self.adiciona_vertice(int(v1), v1)
-                    self.adiciona_vertice(int(v2), v2)
-                    self.adiciona_aresta(v1, v2, peso)
+
 
 
 if __name__ == "__main__":
