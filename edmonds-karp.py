@@ -55,7 +55,7 @@ def main():
 		for v in g.vertices.keys():
 			l.append(g.get_vertice(u).peso(v, True))
 		C.append(l)
-	print(edmonds_karp(C, int(g.s) - 1,int(g.t) -1))
+	print("Fluxo máximo:", edmonds_karp(C, int(g.s) - 1,int(g.t) -1))
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:

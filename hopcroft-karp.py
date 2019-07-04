@@ -52,8 +52,11 @@ def main():
 	filename = sys.argv[1]
 	g = BipartiteGraph(filename)
 	m, mate = hopcroft_karp(g)
-	print("Emparelhamento máximo: " + str(m) + "\n")
+	print("Emparelhamento máximo:", m)
 	print("Arestas:", mate)
 
-	print()
-main()
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Use: ./" + sys.argv[0] + " [Nome do Arquivo]")
+    else:
+        main()
